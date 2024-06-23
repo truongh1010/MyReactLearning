@@ -1,11 +1,35 @@
-export default function Player({ name, sympol }) {
+import { useState } from "react";
+
+export default function Player({ inititalName, sympol }) {
+  const [playerName, setPlayerName] = useState(inititalName);
+  const [isEditing, setIsEditing] = useState(false);
+
+  function handleEditClick() {
+    setIsEditing((editing) => !editing);
+  }
+
+  function handleChange(event) {
+    console.log(event);
+    setPlayerName(event.target.value);
+  }
+
+  let editedPlayerName = <span className="player-name">{playerName}</span>;
+  // let buttonCaption = 'Edit'
+
+  if (isEditing) {
+    editedPlayerName = (
+      <input type="text" required value={playerName} onChange={handleChange} />
+    );
+    // buttonCaption = 'Save'
+  }
+
   return (
     <li>
       <span className="player">
-        <span className="player-name">{name}</span>
+        {editedPlayerName}
         <span className="player-symplol">{sympol}</span>
       </span>
-      <button>Edit</button>
+      <button onClick={handleEditClick}>{isEditing ? "Save" : "Edit"}</button>
     </li>
   );
 }
