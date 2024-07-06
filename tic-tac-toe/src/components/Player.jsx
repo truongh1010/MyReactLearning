@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-export default function Player({ inititalName, sympol }) {
+export default function Player({ inititalName, sympol, isActive }) {
   const [playerName, setPlayerName] = useState(inititalName);
   const [isEditing, setIsEditing] = useState(false);
 
@@ -24,7 +24,7 @@ export default function Player({ inititalName, sympol }) {
   }
 
   return (
-    <li>
+    <li className={isActive ? "active" : undefined}>
       <span className="player">
         {editedPlayerName}
         <span className="player-symplol">{sympol}</span>
